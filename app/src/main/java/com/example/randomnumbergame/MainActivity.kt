@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getRecord()
 
         val button = findViewById<Button>(R.id.button)
         val editText = findViewById<EditText>(R.id.editText)
@@ -78,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         }
         this.score += points
         dialogShow(points)
-        setRecord()
     }
 
     fun dialogShow(points: Int){
@@ -88,18 +86,5 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("Play again"){ dialogInterface: DialogInterface, i: Int -> }
         val dialog: AlertDialog = builder.create()
         dialog.show()
-    }
-
-    fun setRecord(){
-        val sharedScore =  this.getSharedPreferences("com.example.randomnumbergame.shared", 0)
-        val edit = sharedScore.edit()
-        edit.putInt("score", this.score)
-        edit.apply()
-    }
-
-    fun getRecord(){
-        val sharedScore = this.getSharedPreferences("com.example.randomnumbergame.shared",0)
-        this.score = sharedScore.getInt("score", 0)
-        findViewById<TextView>(R.id.score).text = "Score: " + score.toString()
     }
 }
